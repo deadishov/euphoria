@@ -1,0 +1,29 @@
+.searchWrapper {
+    position: relative;
+    max-width: 267px;
+
+    @media (max-width: 1300px) {
+        max-width: 200px;
+    }
+
+    .search {
+        border-radius: 8px;
+        width: 100%;
+        background: #F6F6F6;
+        border: none;
+        padding: 12px 20px 12px 52px;
+        height: 44px;
+        font-size: 16px;
+
+        &::placeholder {
+            color: #807D7E;
+            font-size: 16px;
+        }
+    }
+
+    .searchImg {
+        position: absolute;
+        top: 12px;
+        left: 20px;
+    }
+}

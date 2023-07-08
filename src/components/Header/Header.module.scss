@@ -27,3 +27,12 @@
         left: 20px;
     }
 }
+
+.headerLink {
+    color: inherit;
+
+    &:hover {
+        color: '#3C4242';
+        transition: 'color 0.3s'
+    }
+}

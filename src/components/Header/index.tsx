@@ -1,5 +1,3 @@
-import React from 'react'
-
 import { AppBar, Badge, Box, Link, Toolbar } from '@mui/material'
 import logoSvg from '../../assets/img/logo.svg'
 import searchSvg from '../../assets/img/search.svg'
@@ -12,14 +10,11 @@ import styles from './Header.module.scss'
 
 export const Header = () => {
 
-    const linkHover = (e: any) => {
-        e.target.style.color = '#3C4242'
-        e.target.style.transition = 'color 0.3s'
-    }
-
-    const linkNormal = (e: any) => {
-        e.target.style.color = 'inherit'
-        e.target.style.transition = 'color 0.3s'
+    const badgeStyles = {
+        cursor: 'pointer',
+        background: '#F6F6F6',
+        p: '12px',
+        borderRadius: '8px'
     }
 
     return (
@@ -44,43 +39,43 @@ export const Header = () => {
                         gap: '40px'
                     }}>
                         <Link
-                            onMouseEnter={linkHover}
-                            onMouseLeave={linkNormal}
+                            className={styles.headerLink}
+                            sx={{ color: 'inherit' }}
                             href='#'
                             underline='none'
-                            color='inherit'>
+                        >
                             Shop
                         </Link>
                         <Link
-                            onMouseEnter={linkHover}
-                            onMouseLeave={linkNormal}
+                            className={styles.headerLink}
+                            sx={{ color: 'inherit' }}
                             href='#'
                             underline='none'
-                            color='inherit'>
+                        >
                             Men
                         </Link>
                         <Link
-                            onMouseEnter={linkHover}
-                            onMouseLeave={linkNormal}
+                            className={styles.headerLink}
+                            sx={{ color: 'inherit' }}
                             href='#'
                             underline='none'
-                            color='inherit'>
+                        >
                             Women
                         </Link>
                         <Link
-                            onMouseEnter={linkHover}
-                            onMouseLeave={linkNormal}
+                            className={styles.headerLink}
+                            sx={{ color: 'inherit' }}
                             href='#'
                             underline='none'
-                            color='inherit'>
+                        >
                             Combos
                         </Link>
                         <Link
-                            onMouseEnter={linkHover}
-                            onMouseLeave={linkNormal}
+                            className={styles.headerLink}
+                            sx={{ color: 'inherit' }}
                             href='#'
                             underline='none'
-                            color='inherit'>
+                        >
                             Joggers
                         </Link>
                     </Box>
@@ -89,13 +84,13 @@ export const Header = () => {
                         <img className={styles.searchImg} src={searchSvg} alt="search-icon" />
                     </div>
                     <Box sx={{ display: 'flex', gap: '12px' }}>
-                        <Badge sx={{ cursor: 'pointer' }} >
+                        <Badge sx={badgeStyles} >
                             <img src={favSvg} alt="" />
                         </Badge>
-                        <Badge sx={{ cursor: 'pointer' }} >
+                        <Badge sx={badgeStyles} >
                             <img src={userSvg} alt="" />
                         </Badge>
-                        <Badge sx={{ cursor: 'pointer' }} >
+                        <Badge sx={badgeStyles} >
                             <img src={cartSvg} alt="" />
                         </Badge>
                     </Box>

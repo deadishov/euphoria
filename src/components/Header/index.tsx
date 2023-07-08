@@ -1,14 +1,27 @@
+import React from 'react'
+
 import { AppBar, Badge, Box, Link, Toolbar } from '@mui/material'
 import logoSvg from '../../assets/img/logo.svg'
 import searchSvg from '../../assets/img/search.svg'
 import userSvg from '../../assets/img/user.svg'
 import favSvg from '../../assets/img/favorite.svg'
 import cartSvg from '../../assets/img/cart.svg'
-
-
 import styles from './Header.module.scss'
 
+
+
 export const Header = () => {
+
+    const linkHover = (e: any) => {
+        e.target.style.color = '#3C4242'
+        e.target.style.transition = 'color 0.3s'
+    }
+
+    const linkNormal = (e: any) => {
+        e.target.style.color = 'inherit'
+        e.target.style.transition = 'color 0.3s'
+    }
+
     return (
         <Box>
             <AppBar sx={{
@@ -19,22 +32,55 @@ export const Header = () => {
                 pb: '32px',
                 backgroundColor: '#ffffff'
             }}>
-                <Toolbar sx={{ display: 'flex', justifyContent: 'space-between' }}>
-                    <img src={logoSvg} alt="LOGO" />
-                    <Box sx={{ color: '#807D7E', display: 'flex', alignItems: 'center', gap: '40px' }}>
-                        <Link href='#' underline='none' color='inherit'>
+                <Toolbar sx={{
+                    display: 'flex',
+                    justifyContent: 'space-between'
+                }}>
+                    <img style={{ cursor: 'pointer' }} src={logoSvg} alt="LOGO" />
+                    <Box sx={{
+                        color: '#807D7E',
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '40px'
+                    }}>
+                        <Link
+                            onMouseEnter={linkHover}
+                            onMouseLeave={linkNormal}
+                            href='#'
+                            underline='none'
+                            color='inherit'>
                             Shop
                         </Link>
-                        <Link href='#' underline='none' color='inherit'>
+                        <Link
+                            onMouseEnter={linkHover}
+                            onMouseLeave={linkNormal}
+                            href='#'
+                            underline='none'
+                            color='inherit'>
                             Men
                         </Link>
-                        <Link href='#' underline='none' color='inherit'>
+                        <Link
+                            onMouseEnter={linkHover}
+                            onMouseLeave={linkNormal}
+                            href='#'
+                            underline='none'
+                            color='inherit'>
                             Women
                         </Link>
-                        <Link href='#' underline='none' color='inherit'>
+                        <Link
+                            onMouseEnter={linkHover}
+                            onMouseLeave={linkNormal}
+                            href='#'
+                            underline='none'
+                            color='inherit'>
                             Combos
                         </Link>
-                        <Link href='#' underline='none' color='inherit'>
+                        <Link
+                            onMouseEnter={linkHover}
+                            onMouseLeave={linkNormal}
+                            href='#'
+                            underline='none'
+                            color='inherit'>
                             Joggers
                         </Link>
                     </Box>

@@ -23,6 +23,10 @@
         max-width: 13rem;
     }
 
+    @media (max-width: 450px) {
+        display: none;
+    }
+
     .search {
         display: flex;
         align-items: center;

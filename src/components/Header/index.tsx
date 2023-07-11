@@ -1,15 +1,10 @@
 import React from 'react'
 
-import { AppBar, Badge, Box, Button, InputBase, TextField, Toolbar } from '@mui/material'
-import { alpha, styled, useTheme } from '@mui/material/styles';
-import SearchIcon from '@mui/icons-material/Search';
-import IconButton from '@mui/material/IconButton';
+import { AppBar, Badge, Box, Button, TextField, Toolbar } from '@mui/material'
 import MenuIcon from '@mui/icons-material/Menu';
 import Drawer from '@mui/material/Drawer';
 import List from '@mui/material/List';
 import Divider from '@mui/material/Divider';
-import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
-import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';

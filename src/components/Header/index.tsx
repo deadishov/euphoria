@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { AppBar, Badge, Box, InputBase, Toolbar } from '@mui/material'
+import { AppBar, Badge, Box, Button, InputBase, TextField, Toolbar } from '@mui/material'
 import { alpha, styled, useTheme } from '@mui/material/styles';
 import SearchIcon from '@mui/icons-material/Search';
 import IconButton from '@mui/material/IconButton';
@@ -22,73 +22,69 @@ import favSvg from '../../assets/img/favorite.svg'
 import cartSvg from '../../assets/img/cart.svg'
 import styles from './Header.module.scss'
 
-const drawerWidth = 200;
 
-const DrawerHeader = styled('div')(({ theme }) => ({
-    display: 'flex',
-    alignItems: 'center',
-    padding: theme.spacing(0, 1),
-    // necessary for content to be below app bar
-    ...theme.mixins.toolbar,
-    justifyContent: 'flex-start',
-}));
-
-const Search = styled('div')(({ theme }) => ({
-    position: 'relative',
-    borderRadius: theme.shape.borderRadius,
-    backgroundColor: alpha(theme.palette.common.white, 0.15),
-    '&:hover': {
-        backgroundColor: alpha(theme.palette.common.white, 0.25),
-    },
-    marginLeft: 0,
-    width: '100%',
-    [theme.breakpoints.up('sm')]: {
-        marginLeft: theme.spacing(1),
-        width: 'auto',
-    },
-}));
-
-const SearchIconWrapper = styled('div')(({ theme }) => ({
-    padding: theme.spacing(0, 2),
-    height: '100%',
-    position: 'absolute',
-    pointerEvents: 'none',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-}));
-
-const StyledInputBase = styled(InputBase)(({ theme }) => ({
-    color: 'inherit',
-    '& .MuiInputBase-input': {
-        padding: theme.spacing(1, 1, 1, 0),
-        // vertical padding + font size from searchIcon
-        paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-        transition: theme.transitions.create('width'),
-        width: '100%',
-        [theme.breakpoints.up('sm')]: {
-            width: '12ch',
-            '&:focus': {
-                width: '20ch',
-            },
-        },
-    },
-}));
 
 
 export const Header = () => {
 
-    const [open, setOpen] = React.useState(false)
-    const theme = useTheme();
+    const [state, setState] = React.useState(false);
 
+    const toggleDrawer = () =>
+        (event: React.KeyboardEvent | React.MouseEvent) => {
+            if (
+                event.type === 'keydown' &&
+                ((event as React.KeyboardEvent).key === 'Tab' ||
+                    (event as React.KeyboardEvent).key === 'Shift')
+            ) {
+                return;
+            }
 
-    const drawerOpen = () => {
-        setOpen(true)
-    }
+            setState(!state);
+        };
 
-    const drawerClose = () => {
-        setOpen(false)
-    }
+    const list = () => (
+        <>
+            <Box
+                sx={{ minWidth: '200px', color: '#807D7E' }}
+                role="presentation"
+                onClick={toggleDrawer()}
+                onKeyDown={toggleDrawer()}
+            >
+                <List >
+                    {['Shop', 'Men', 'Women', 'Combos', 'Joggers'].map((text) => (
+                        <ListItem key={text} disablePadding>
+                            <ListItemButton className={styles.burgerLink}>
+                                <ListItemText sx={{ textAlign: 'center' }} primary={text} />
+                            </ListItemButton>
+                        </ListItem>
+                    ))}
+                </List>
+                <Divider />
+                <List>
+                    {['Favorites', 'Profile', 'Cart'].map((text, index) => (
+                        <ListItem key={text} disablePadding>
+                            <ListItemButton className={styles.burgerLink} >
+                                <ListItemIcon>
+                                    {index === 0 && <img src={favSvg} alt="favorites" />}
+                                    {index === 1 && <img src={userSvg} alt="user" />}
+                                    {index === 2 && <img src={cartSvg} alt="cart" />}
+                                </ListItemIcon>
+                                <ListItemText primary={text} />
+                            </ListItemButton>
+                        </ListItem>
+                    ))}
+                </List>
+                <Divider />
+            </Box>
+            <Box className={styles.burgerSearch} sx={{ justifyContent: 'center', pt: '10px' }} >
+                <TextField
+                    color='secondary'
+                    sx={{ maxWidth: '80%' }}
+                    label="Search"
+                    variant="standard" />
+            </Box>
+        </>
+    );
 
     const badgeStyles = {
         cursor: 'pointer',
@@ -117,6 +113,7 @@ export const Header = () => {
         pb: '32px',
         backgroundColor: '#ffffff'
     }
+
 
     return (
         <>
@@ -195,72 +192,21 @@ export const Header = () => {
                             <input className={styles.search} placeholder='Search' type="text" />
                             <img className={styles.searchImg} src={searchSvg} alt="search-icon" />
                         </div>
-                        <IconButton
-                            onClick={drawerOpen}
-                            size="large"
-                            edge="start"
-                            color="inherit"
-                            aria-label="open drawer"
-                            sx={{ ...(open && { opacity: '0', transition: 'opacity 0.2s', cursor: 'default' }) }}
-                        >
-                            <MenuIcon />
-                        </IconButton>
+                        <div>
+                            {(['right'] as const).map((anchor) => (
+                                <React.Fragment key={anchor}>
+                                    <Button onClick={toggleDrawer()}><MenuIcon sx={{ color: '#000' }} /></Button>
+                                    <Drawer
+                                        anchor={anchor}
+                                        open={state}
+                                        onClose={toggleDrawer()}
+                                    >
+                                        {list()}
+                                    </Drawer>
+                                </React.Fragment>
+                            ))}
+                        </div>
                     </Toolbar>
-                    <Drawer
-                        sx={{
-                            width: drawerWidth,
-                            flexShrink: 0,
-                            '& .MuiDrawer-paper': {
-                                width: drawerWidth,
-                            },
-                        }}
-                        variant="persistent"
-                        anchor="right"
-                        open={open}
-                    >
-                        <DrawerHeader>
-                            <IconButton onClick={drawerClose}>
-                                {theme.direction === 'rtl' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
-                            </IconButton>
-                        </DrawerHeader>
-                        <Divider />
-                        <List>
-                            {['Shop', 'Men', 'Women', 'Combos', 'Joggers'].map((text) => (
-                                <ListItem key={text} disablePadding>
-                                    <ListItemButton sx={{ textAlign: 'center' }}>
-                                        <ListItemText primary={text} />
-                                    </ListItemButton>
-                                </ListItem>
-                            ))}
-                        </List>
-                        <Divider />
-                        <List>
-                            {['Favorites', 'Profile', 'Cart'].map((text, index) => (
-                                <ListItem key={text} disablePadding>
-                                    <ListItemButton>
-                                        <ListItemIcon>
-                                            {
-                                                index === 0 && <img src={favSvg} alt="favs" /> ||
-                                                index === 1 && <img src={userSvg} alt="user" /> ||
-                                                index === 2 && <img src={cartSvg} alt="cart" />
-                                            }
-                                        </ListItemIcon>
-                                        <ListItemText primary={text} />
-                                    </ListItemButton>
-                                </ListItem>
-                            ))}
-                        </List>
-                        <Divider />
-                        <Search sx={{ mt: '10px' }}>
-                            <SearchIconWrapper>
-                                <SearchIcon sx={{ opacity: '0.3' }} />
-                            </SearchIconWrapper>
-                            <StyledInputBase
-                                placeholder="Search"
-                                inputProps={{ 'aria-label': 'search' }}
-                            />
-                        </Search>
-                    </Drawer>
                 </AppBar>
             </Box>
         </>

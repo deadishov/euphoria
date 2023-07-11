@@ -92,3 +92,19 @@
         }
     }
 }
+
+.burgerLink {
+    transition: color 0.2s;
+
+    &:hover {
+        color: #3C4242;
+    }
+}
+
+.burgerSearch {
+    display: flex;
+
+    @media (min-width: 450px) {
+        display: none;
+    }
+}

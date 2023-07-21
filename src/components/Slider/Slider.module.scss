@@ -8,6 +8,44 @@
         height: 716px;
         object-fit: cover;
         object-position: top;
+
+        .slideTitle {
+            font-size: 32px;
+            color: #fff;
+            font-style: normal;
+            font-weight: 500;
+            line-height: 37px;
+            letter-spacing: 0.157px;
+            text-transform: capitalize;
+        }
+
+        .slideHeadline {
+            font-size: 78px;
+            font-style: normal;
+            font-weight: 800;
+            line-height: 93px;
+            letter-spacing: 0.315px;
+            color: #fff;
+            max-width: 439px;
+
+        }
+
+        .slideButton {
+            color: #3C4242;
+            font-size: 24px;
+            font-style: normal;
+            font-weight: 700;
+            line-height: normal;
+            padding: 16px 72px;
+            border-radius: 8px;
+            background: #FFF;
+            border: none;
+            cursor: pointer;
+
+            &:hover {
+                filter: brightness(1.4);
+            }
+        }
     }
 
     .sliderNav {
@@ -26,4 +64,28 @@
             cursor: pointer;
         }
     }
+
+    .scrollbarWrapper {
+        display: flex;
+        justify-content: center;
+
+        .scrollbar {
+            width: 126px;
+            z-index: 1;
+            height: 10px;
+            background-color: rgba(255, 255, 255, 0.4);
+            position: absolute;
+            bottom: 50px;
+            border-radius: 12px;
+            overflow: hidden;
+
+            .roller {
+                width: 50%;
+                height: 100%;
+                background-color: #fff;
+                transition: transform 0.3s;
+            }
+        }
+    }
+
 }

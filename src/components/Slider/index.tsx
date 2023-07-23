@@ -41,7 +41,7 @@ export const Slider = () => {
                 slidesPerView={1}
                 spaceBetween={50}
             >
-                {slidesArr.map((slide) => (
+                {slidesArr.filter(slide => slide.id < '6').map((slide) => (
                     <SwiperSlide
                         style={{
                             backgroundImage: `url(${slide.image})`,
@@ -87,8 +87,8 @@ export const Slider = () => {
                     />
                 </div>
                 <div className={styles.scrollbarWrapper}>
-                    <div className={styles.scrollbar}>
-                        <div style={slideCount === 1 ? { transform: 'translateX(0)' } : { transform: 'translateX(100%)' }} className={styles.roller}></div>
+                    <div style={{ width: `${String(slidesArr.length * 63)}px` }} className={styles.scrollbar}>
+                        <div style={slideCount === 1 ? { transform: 'translateX(0)' } : { transform: `translateX(${(slideCount - 1) * 100}%)` }} className={styles.roller}></div>
                     </div>
                 </div>
             </Swiper>

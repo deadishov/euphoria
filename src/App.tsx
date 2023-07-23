@@ -1,14 +1,15 @@
-import { Container } from '@mui/system';
 import { Header } from './components/Header';
-import { Slider } from './components/Slider';
+import { MainSlider } from './components/MainSlider';
 import './scss/app.scss'
+import slidesArr from './slidesArr.json'
+
 
 
 function App() {
   return (
     <>
       <Header />
-      <Slider />
+      <MainSlider list={slidesArr} />
     </>
   );
 }

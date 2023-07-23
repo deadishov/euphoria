@@ -6,17 +6,21 @@ import 'swiper/scss';
 import 'swiper/scss/navigation';
 import 'swiper/scss/pagination';
 import 'swiper/scss/scrollbar';
-import slidesArr from './slidesArr.json'
 import arrowRight from '../../assets/img/arrowRight.svg'
 import arrowLeft from '../../assets/img/arrowLeft.svg'
 import arrowRightDisabled from '../../assets/img/rightDisabled.svg'
 import arrowLeftDisabled from '../../assets/img/leftDisabled.svg'
-import './Slider.module.scss'
-import styles from './Slider.module.scss'
+import styles from './MainSlider.module.scss'
 import { Container } from '@mui/system';
 import React from 'react';
 
-export const Slider = () => {
+type Slide = {
+    id: string,
+    image: string,
+    headline: string
+}
+
+export const MainSlider: React.FC<{ list: Slide[] }> = ({ list }) => {
     const swiperRef = useRef<SwiperType>();
     const [slideCount, setSlideCount] = React.useState(1)
 
@@ -28,6 +32,8 @@ export const Slider = () => {
     const slidePrev = () => {
         swiperRef.current?.slidePrev()
     }
+
+    const filtredArr = list.filter(slide => slide.id < '6')
 
     return (
         <div>
@@ -41,7 +47,7 @@ export const Slider = () => {
                 slidesPerView={1}
                 spaceBetween={50}
             >
-                {slidesArr.filter(slide => slide.id < '6').map((slide) => (
+                {filtredArr.map((slide) => (
                     <SwiperSlide
                         style={{
                             backgroundImage: `url(${slide.image})`,
@@ -64,7 +70,7 @@ export const Slider = () => {
                                 }
                             }}>
                             {slide.id === '1' && <h3 className={styles.slideTitle}>T-shirt / Tops</h3>}
-                            <h1 className={styles.slideHeadline}>{slide.id === '1' ? `Summer Value Pack` : `Don't miss SALES!`}</h1 >
+                            <h1 className={styles.slideHeadline}>{slide.headline}</h1 >
                             {slide.id === '1' && <h3 className={styles.slideTitle}>cool / colorful / comfy</h3>}
                             <div>
                                 <button className={styles.slideButton}>{slide.id === '1' ? 'Shop Now' : `Let's go!`}</button>
@@ -80,14 +86,14 @@ export const Slider = () => {
                         alt='arrow'
                     />
                     <img
-                        className={Number(slideCount) === slidesArr.length ? styles.arrowRightDisabled : styles.arrowRight}
-                        src={Number(slideCount) === slidesArr.length ? arrowRightDisabled : arrowRight}
+                        className={Number(slideCount) === filtredArr.length ? styles.arrowRightDisabled : styles.arrowRight}
+                        src={Number(slideCount) === filtredArr.length ? arrowRightDisabled : arrowRight}
                         onClick={slideNext}
                         alt='arrow'
                     />
                 </div>
                 <div className={styles.scrollbarWrapper}>
-                    <div style={{ width: `${String(slidesArr.length * 63)}px` }} className={styles.scrollbar}>
+                    <div style={{ width: `${String(filtredArr.length * 63)}px` }} className={styles.scrollbar}>
                         <div style={slideCount === 1 ? { transform: 'translateX(0)' } : { transform: `translateX(${(slideCount - 1) * 100}%)` }} className={styles.roller}></div>
                     </div>
                 </div>

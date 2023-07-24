@@ -17,10 +17,17 @@ import React from 'react';
 type Slide = {
     id: string,
     image: string,
-    headline: string
+    headline: string,
+    tagline?: string,
+    category?: string,
+    buttonText?: string
 }
 
-export const MainSlider: React.FC<{ list: Slide[] }> = ({ list }) => {
+interface MainSliderProps {
+    list: Slide[]
+}
+
+export const MainSlider: React.FC<MainSliderProps> = ({ list }) => {
     const swiperRef = useRef<SwiperType>();
     const [slideCount, setSlideCount] = React.useState(1)
 
@@ -32,8 +39,6 @@ export const MainSlider: React.FC<{ list: Slide[] }> = ({ list }) => {
     const slidePrev = () => {
         swiperRef.current?.slidePrev()
     }
-
-    const filtredArr = list.filter(slide => slide.id < '6')
 
     return (
         <div>
@@ -47,7 +52,7 @@ export const MainSlider: React.FC<{ list: Slide[] }> = ({ list }) => {
                 slidesPerView={1}
                 spaceBetween={50}
             >
-                {filtredArr.map((slide) => (
+                {list.map((slide) => (
                     <SwiperSlide
                         style={{
                             backgroundImage: `url(${slide.image})`,
@@ -69,11 +74,11 @@ export const MainSlider: React.FC<{ list: Slide[] }> = ({ list }) => {
                                     sm: '630px'
                                 }
                             }}>
-                            {slide.id === '1' && <h3 className={styles.slideTitle}>T-shirt / Tops</h3>}
+                            {slide?.category && <h3 className={styles.slideTitle}>{slide.category}</h3>}
                             <h1 className={styles.slideHeadline}>{slide.headline}</h1 >
-                            {slide.id === '1' && <h3 className={styles.slideTitle}>cool / colorful / comfy</h3>}
+                            {slide?.tagline && <h3 className={styles.slideTitle}>{slide.tagline}</h3>}
                             <div>
-                                <button className={styles.slideButton}>{slide.id === '1' ? 'Shop Now' : `Let's go!`}</button>
+                                {slide.buttonText && <button className={styles.slideButton}>{slide.buttonText}</button>}
                             </div>
                         </Container>
                     </SwiperSlide>
@@ -86,14 +91,14 @@ export const MainSlider: React.FC<{ list: Slide[] }> = ({ list }) => {
                         alt='arrow'
                     />
                     <img
-                        className={Number(slideCount) === filtredArr.length ? styles.arrowRightDisabled : styles.arrowRight}
-                        src={Number(slideCount) === filtredArr.length ? arrowRightDisabled : arrowRight}
+                        className={Number(slideCount) === list.length ? styles.arrowRightDisabled : styles.arrowRight}
+                        src={Number(slideCount) === list.length ? arrowRightDisabled : arrowRight}
                         onClick={slideNext}
                         alt='arrow'
                     />
                 </div>
                 <div className={styles.scrollbarWrapper}>
-                    <div style={{ width: `${String(filtredArr.length * 63)}px` }} className={styles.scrollbar}>
+                    <div style={{ width: `${String(list.length * 63)}px` }} className={styles.scrollbar}>
                         <div style={slideCount === 1 ? { transform: 'translateX(0)' } : { transform: `translateX(${(slideCount - 1) * 100}%)` }} className={styles.roller}></div>
                     </div>
                 </div>

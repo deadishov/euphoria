@@ -6,10 +6,13 @@ import slidesArr from './slidesArr.json'
 
 
 function App() {
+
+  const filtredArr = slidesArr.filter(slide => slide.id < '6')
+
   return (
     <>
       <Header />
-      <MainSlider list={slidesArr} />
+      <MainSlider list={filtredArr} />
     </>
   );
 }

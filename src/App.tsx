@@ -1,13 +1,19 @@
-import { Container } from '@mui/system';
 import { Header } from './components/Header';
+import { MainSlider } from './components/MainSlider';
 import './scss/app.scss'
+import slidesArr from './slidesArr.json'
+
 
 
 function App() {
+
+  const filtredArr = slidesArr.filter(slide => slide.id < '6')
+
   return (
-    <Container>
+    <>
       <Header />
-    </Container>
+      <MainSlider list={filtredArr} />
+    </>
   );
 }
 

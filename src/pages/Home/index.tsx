@@ -1,13 +1,17 @@
 import React from 'react';
-import { Header } from '../components/Header';
-import { MainSlider } from '../components/MainSlider';
-import slidesArr from '../data/slidesArr.json'
-import promoArr from '../data/promo.json'
-import { PromoBlock } from '../components/PromoBlock';
+import { Header } from '../../components/Header';
+import { MainSlider } from '../../components/MainSlider';
+import slidesArr from '../../data/slidesArr.json';
+import promoArr from '../../data/promo.json';
+import arrivalArr from '../../data/arrival.json'
+import { PromoBlock } from '../../components/PromoBlock';
 import { Container, List } from '@mui/material';
+import styles from './Home.module.scss'
+import { ArrivalBlock } from '../../components/ArrivalBlock';
 
 export const Home: React.FC = () => {
     const filtredArr = slidesArr.filter(slide => slide.id < '6')
+
     return (
         <>
             <Header />
@@ -36,7 +40,11 @@ export const Home: React.FC = () => {
                         <PromoBlock block={block} />
                     ))}
                 </List>
+                <h3 className={styles.sectionTitle}>
+                    New Arrival
+                </h3>
             </Container>
+            <ArrivalBlock list={arrivalArr} />
         </>
     )
 }

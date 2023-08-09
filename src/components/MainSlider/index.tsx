@@ -14,7 +14,7 @@ import styles from './MainSlider.module.scss'
 import { Container } from '@mui/system';
 import React from 'react';
 
-type Slide = {
+interface Slide {
     id: string,
     image: string,
     headline: string,

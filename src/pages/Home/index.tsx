@@ -3,11 +3,13 @@ import { Header } from '../../components/Header';
 import { MainSlider } from '../../components/MainSlider';
 import slidesArr from '../../data/slidesArr.json';
 import promoArr from '../../data/promo.json';
-import arrivalArr from '../../data/arrival.json'
+import arrivalArr from '../../data/arrival.json';
+import savingZoneArr from '../../data/savingZone.json'
 import { PromoBlock } from '../../components/PromoBlock';
 import { Container, List } from '@mui/material';
 import styles from './Home.module.scss'
 import { ArrivalBlock } from '../../components/ArrivalBlock';
+import { BigSavingZone } from '../../components/BigSavingZone';
 
 export const Home: React.FC = () => {
     const filtredArr = slidesArr.filter(slide => slide.id < '6')
@@ -37,7 +39,7 @@ export const Home: React.FC = () => {
                     },
                 }}>
                     {promoArr.map((block) => (
-                        <PromoBlock block={block} />
+                        <PromoBlock key={block.image_url} block={block} />
                     ))}
                 </List>
                 <h3 className={styles.sectionTitle}>
@@ -45,6 +47,12 @@ export const Home: React.FC = () => {
                 </h3>
             </Container>
             <ArrivalBlock list={arrivalArr} />
+            <Container>
+                <h3 className={styles.sectionTitle}>
+                    New Arrival
+                </h3>
+                <BigSavingZone list={savingZoneArr} />
+            </Container>
         </>
     )
 }

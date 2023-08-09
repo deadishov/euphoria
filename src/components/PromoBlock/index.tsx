@@ -2,7 +2,7 @@ import { Link, ListItem, Typography } from '@mui/material'
 import React from 'react'
 import styles from './PromoBlock.module.scss'
 
-type BlockProps = {
+interface BlockProps {
     title: string,
     headline: string,
     tagline: string,

@@ -13,7 +13,8 @@ import 'swiper/scss/navigation';
 import 'swiper/scss/pagination';
 import 'swiper/scss/scrollbar';
 
-type Slide = {
+interface Slide {
+    id: string,
     image_url: string,
     title: string
 }
@@ -64,6 +65,7 @@ export const ArrivalBlock: React.FC<ArrivalBlockProps> = ({ list }) => {
                 >
                     {list.map((slide) => (
                         <SwiperSlide
+                            key={slide.id}
                             className={styles.slide}>
                             <Box sx={{ display: 'flex', flexDirection: 'column', gap: '33px', alignItems: 'center' }}>
                                 <CardMedia
